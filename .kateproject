@@ -1,0 +1,10 @@
+{
+  "name": "Logic Simulator"
+, "files": [ { "directory": ".",
+      "filters": [
+    "*.py",
+    "*.md"
+      ], 
+    "recursive": 1 } 
+  ]
+}
