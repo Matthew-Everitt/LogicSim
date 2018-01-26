@@ -20,4 +20,14 @@ class Connectable(BaseClass.BaseClass):
         
 
   def connect(self, connection):
+    """ What you should allow connectons to depends heavily on what you are, so child classes need to implement this themselves. The only common requirement is that the object gets added to self.connections anyway."""
     raise NotImplementedError( str(self)+" doesn't properly implement connect") 
+  
+  def disconnect(self,connection):
+    """ Simple disconnecter for set based lists of connections - the default"""
+    if connection in self.connections:
+      self.connections.remove(connection)
+      connection.disconnect(self)
+    else:
+      if debug.debugLevel >= debug.debugLevels.Warning:
+        print "Tried to remove ", connection, " from ", self, " but it wasn't connected"
