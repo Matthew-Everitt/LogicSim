@@ -1,3 +1,2 @@
 class ConnectionError(Exception):
-  pass 
-
+  pass
