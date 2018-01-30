@@ -12,9 +12,9 @@ Things to be getting on with:
   
   Add connection seeking - Traverse all connections unless they've alreasy been covered, keep list of nodes, edges. Spew out a list of nodes, edges in dot.
   
-  Add resistance finding. Same as above but store the chain and stop when you reach a fixed voltage. For normal voltages need to calculate voltage at other end along with the effective output impedance, then pretend to be a new src with those values.
+#  Add resistance finding. Same as above but store the chain and stop when you reach a fixed voltage. For normal voltages need to calculate voltage at other end along with the effective output impedance, then pretend to be a new src with those values.
   
-  Add voltage calculation by find above chains, getting total resistance and then doing a waited sum of all voltage sources given the resistance to them
+#  Add voltage calculation by find above chains, getting total resistance and then doing a waited sum of all voltage sources given the resistance to them
   
   Add logic level devices that contain pins (connectables with a single connection) that do IC style things
   

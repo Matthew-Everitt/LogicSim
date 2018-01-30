@@ -18,7 +18,6 @@ verboseObjectNames = True
 __indent=-1
 
 def indent(func):
-  print("Wrapping",func)
   def wrapper(*args,**kwargs):
     global __indent
     __indent+=1
