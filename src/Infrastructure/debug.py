@@ -1,4 +1,5 @@
-from enum import Enum
+from __future__ import print_function
+
 
 from everyLine import EveryLine
 
@@ -13,3 +14,25 @@ debugLevel =  DebugLevels.verbose
 
 """ If verboseObjectNames _repr__ includes the python id """
 verboseObjectNames = True
+
+__indent=-1
+
+def indent(func):
+  print("Wrapping",func)
+  def wrapper(*args,**kwargs):
+    global __indent
+    __indent+=1
+    x=func(*args,**kwargs)
+    __indent-=1
+    return x
+  return wrapper
+
+def __print(*args):
+  global __indent
+  #print("__indent is ",__indent)
+  print(__indent,":","_"*__indent,*args)
+  
+  
+def verbose(*args,**kwargs):
+  if debugLevel >= DebugLevels.verbose:
+    __print(*args,**kwargs)

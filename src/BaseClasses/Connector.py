@@ -18,7 +18,7 @@ class Connector(Connectable.Connectable):
     if connection in self.connections:
       if debug.debugLevel >= debug.DebugLevels.verbose:
         print self,"already connected to",connection
-        return
+      return
     
     #Resistors can only connect to two places. Those places should be junctions, which can connect to arbitrarily many things, but a resistor itself has two ends.
     if len(self.connections) == 2:

@@ -12,3 +12,13 @@ class AbsoluteVoltage(Junction.Junction):
     super(AbsoluteVoltage,self).__init__(*args,**kwargs)
     self.voltage=voltage
   
+  @debug.indent
+  def getTheveninEquiv(self,exclude=None):
+    """ 
+    The Thevenin equivalent of a source is ... the source.
+    
+    Returns two values, the effective voltage and resistance.
+    """
+    if debug.debugLevel >= debug.DebugLevels.verbose:
+      debug.verbose("Generating Thevenin equiv for",self,"- fixed voltage of",self.voltage)
+    return float(self.voltage),0.0
