@@ -30,7 +30,7 @@ def indent(func):
 def __print(*args):
   global __indent
   #print("__indent is ",__indent)
-  print(__indent,":","_"*__indent,*args)
+  print(__indent,":"," |"*__indent,*args)
   
   
 def verbose(*args,**kwargs):
