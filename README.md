@@ -10,7 +10,7 @@ Things to be getting on with:
 
   Add dot language representations to everything - Connector, Device, Junction, AbsoluteVoltage, Polarized etc
   
-  Add connection seeking - Traverse all connections unless they've alreasy been covered, keep list of nodes, edges. Spew out a list of nodes, edges in dot.
+  Add connection seeking - Traverse all connections unless they've already been covered, keep list of nodes, edges. Spew out a list of nodes, edges in dot.
   
 #  Add resistance finding. Same as above but store the chain and stop when you reach a fixed voltage. For normal voltages need to calculate voltage at other end along with the effective output impedance, then pretend to be a new src with those values.
   
