@@ -30,7 +30,7 @@ class TestStringMethods(unittest.TestCase):
     S.connect(j)
     S.connect(gnd)
 
-    return j.getVoltageResistance()
+    return probe.getVoltageResistance()
 
     
   def test_EqualDivider(self):
