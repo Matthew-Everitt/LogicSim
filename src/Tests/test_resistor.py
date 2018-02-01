@@ -5,12 +5,14 @@ import unittest
 import resistor
 import BaseClasses.Junction as Junction
 import BaseClasses.AbsoluteVoltage as AbsoluteVoltage
-
+import BaseClasses.VoltageProbe as VoltageProbe
 class TestStringMethods(unittest.TestCase):
 
   def twoResistorDivider(self,R1,R2,V):
     src = AbsoluteVoltage.AbsoluteVoltage(V,name="Vcc")
     gnd = AbsoluteVoltage.AbsoluteVoltage(0,name="GND")
+    
+    probe=VoltageProbe.VoltageProbe()
 
     j = Junction.Junction(name="Output")
 
@@ -23,14 +25,12 @@ class TestStringMethods(unittest.TestCase):
     R.connect(src)
     R.connect(j)
 
+    probe.connect(j)
+
     S.connect(j)
     S.connect(gnd)
-    
-    
-    import Infrastructure.graph
-    Infrastructure.graph.graph(R).output("../junk/test.gv")
-    
-    return j.getTheveninEquiv()
+
+    return probe.getVoltageResistance()
 
     
   def test_EqualDivider(self):
@@ -50,4 +50,6 @@ class TestStringMethods(unittest.TestCase):
     
     self.assertEqual( Vout, Vin/3.0)
     self.assertEqual( Rout, 1.0/(1.0/RinTop+1.0/RinBottom))
+    
+    
     

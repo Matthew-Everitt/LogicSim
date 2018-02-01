@@ -108,3 +108,17 @@ class Connectable(BaseClass.BaseClass):
     outputVoltage = voltageNumerator/voltageDenominator
     outputResistance = 1.0/conductance
     return outputVoltage, outputResistance
+  
+  
+  
+  def getVoltageResistance(self):
+    """ A wrapper for getTheveninEquiv that has a friendlier name. This is actually needed as for outputs that don't assert a voltage we want to be able to return a inf. resistance as a TheveninEquiv, but to be able to measure the rest of the network when queried"""
+    return self.getTheveninEquiv()
+  
+  def getVoltage(self):
+    """ Returns only the voltage part of getVoltageResistance"""
+    return self.getVoltageResistance[0]
+  
+  def getResistance(self):
+    """ Returns only the resistance part of getVoltageResistance"""
+    return self.getVoltageResistance[1]
