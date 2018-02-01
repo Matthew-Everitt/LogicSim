@@ -15,7 +15,7 @@ class dotEntry(dict):
     return iter([self])
 
 class Graph(list):
-  def ouput(self,filename):
+  def output(self,filename):
     with open(filename,"w") as f:
       f.writelines("\n".join(map(str,self)))
       

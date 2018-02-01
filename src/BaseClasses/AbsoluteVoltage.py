@@ -19,9 +19,7 @@ class AbsoluteVoltage(Junction.Junction):
 
     Returns two values, the effective voltage and resistance.
     """
-    if debug.debugLevel >= debug.DebugLevels.verbose:
-      debug.verbose("Generating Thevenin equiv for", self,
-              "- fixed voltage of", self.voltage)
+    debug.verbose("Generating Thevenin equiv for", self, "- fixed voltage of", self.voltage,"V")
     return float(self.voltage), 0.0
 
     

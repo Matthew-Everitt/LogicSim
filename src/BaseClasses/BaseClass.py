@@ -27,7 +27,7 @@ class BaseClass(object):
 
     # Ensure uniquness of name
     if self.__usedNames.has_key(name):
-      self.name = name+'['+str(self.__usedNames[name])+']'
+      self.name = name+'_'+str(self.__usedNames[name])
       self.__usedNames[name] += 1
     else:
       self.name = name
@@ -58,7 +58,7 @@ class BaseClass(object):
     return self.label
 
   def _dotName(self):
-    return str(self).replace(" ","_").replace("-","_")
+    return self.name.replace(" ","_").replace("-","_")
 
   def _dotRepr(self):
     return graph.dotEntry(definition=self._dotName())
