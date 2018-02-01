@@ -3,6 +3,7 @@ import Connectable
 import Junction
 
 import Infrastructure.debug as debug
+import Infrastructure.graph as graph
 from Infrastructure import CircuitExceptions
 
 
@@ -42,3 +43,12 @@ class Connector(Connectable.Connectable):
     # If we reach this point then we haven't known how to connect to whatever it is, which means either somebody is trying to do something really weird, or we just haven't implemented that yet
     raise NotImplementedError("Don't know how to add a connection from "+str(
       connection)+" to "+str(self)+". Maybe try the other way around?")
+
+  def _dotRepr(self):
+    import itertools
+    entries=[]
+    for x,y in itertools.combinations(self.connections,2):
+      entry = graph.dotEntry(definition=x._dotName()+"--"+y._dotName())
+      entry['label']=self.label
+      entries.append(entry)
+    return entries

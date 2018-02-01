@@ -1,6 +1,6 @@
 from numpy import timedelta64 as interval
 import Infrastructure.debug as debug
-
+import Infrastructure.graph as graph
 
 class BaseClass(object):
   """Base class for many things. Implements some basic common functionality that will typically be overwritten"""
@@ -57,5 +57,8 @@ class BaseClass(object):
     """Returns the label of the object, which should be enough to tell the user what the object is supposed to be in context"""
     return self.label
 
-  def __dotName(self):
-    return '"'+self.__repr__()+'"'
+  def _dotName(self):
+    return str(self).replace(" ","_").replace("-","_")
+
+  def _dotRepr(self):
+    return graph.dotEntry(definition=self._dotName())

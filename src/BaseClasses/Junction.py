@@ -3,7 +3,7 @@ import Connectable
 import Connector
 
 import Infrastructure.debug as debug
-
+import Infrastructure.graph as graph
 
 class Junction(Connectable.Connectable):
   """ A place where an arbitrary number of Connectors meet """
@@ -30,5 +30,10 @@ class Junction(Connectable.Connectable):
       return
 
     # If we reach this point then we haven't known how to connect to whatever it is, which means either somebody is trying to do something really weird, or we just haven't implemented that yet
-    raise NotImplementedError("Don't know how to add a connection from "+str(
-      connection)+" to "+str(self)+". Maybe try the other way around?")
+    raise NotImplementedError("Don't know how to add a connection from "+str(connection)+" to "+str(self)+". Maybe try the other way around?")
+  
+  def _dotRepr(self):
+    entry=super(Junction,self)._dotRepr()
+    entry['shape']='point'
+    entry['label']=str(self.label)
+    return entry

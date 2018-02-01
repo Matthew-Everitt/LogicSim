@@ -12,7 +12,7 @@ class AbsoluteVoltage(Junction.Junction):
     super(AbsoluteVoltage, self).__init__(*args, **kwargs)
     self.voltage = voltage
 
-  @debug.indent
+  @debug.indented
   def getTheveninEquiv(self, exclude=None):
     """ 
     The Thevenin equivalent of a source is ... the source.
@@ -23,3 +23,10 @@ class AbsoluteVoltage(Junction.Junction):
       debug.verbose("Generating Thevenin equiv for", self,
               "- fixed voltage of", self.voltage)
     return float(self.voltage), 0.0
+
+    
+  def _dotRepr(self):
+    entries=super(AbsoluteVoltage,self)._dotRepr()
+    for e in entries:
+      entries['shape']='invhouse'
+    return entries

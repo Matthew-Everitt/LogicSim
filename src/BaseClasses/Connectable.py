@@ -40,7 +40,7 @@ class Connectable(BaseClass.BaseClass):
       if debug.debugLevel >= debug.debugLevels.Warning:
         print "Tried to remove ", connection, " from ", self, " but it wasn't connected"
 
-  @debug.indent
+  @debug.indented
   def getTheveninEquiv(self, excluded=[]):
     """ 
     Traverse the graph to determine the voltage of this node, and the output impedance 

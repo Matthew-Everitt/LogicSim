@@ -18,21 +18,40 @@ verboseObjectNames = True
 
 __indent = -1
 
-
-def indent(func):
+def alwaysDebug(level):
+  def decorator(func):
+    def wrapper(*args,**kwargs):
+      global debugLevel
+      oldLevel=debugLevel
+      debugLevel=level
+      x=func(*args,**kwargs)
+      debugLevel=oldLevel
+      return x
+    return wrapper
+  return decorator
+    
+def indented(func):
   def wrapper(*args, **kwargs):
-    global __indent
-    __indent += 1
+    indent()
     x = func(*args, **kwargs)
-    __indent -= 1
+    unindent()
     return x
   return wrapper
 
-
+def indent(n=1):
+  global __indent
+  #print("+",n)
+  __indent += n
+  
+def unindent(n=1):
+  global __indent
+  #print("-",n)
+  __indent -= n
+  
 def __print(*args):
   global __indent
   #print("__indent is ", __indent)
-  print(__indent, ":", " |"*__indent, *args)
+  print("{0:>3}".format(__indent), ":", " |"*__indent, *args)
 
 
 def verbose(*args, **kwargs):

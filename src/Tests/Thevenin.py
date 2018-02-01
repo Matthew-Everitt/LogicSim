@@ -10,10 +10,10 @@ import BaseClasses.Junction as Junction
 
 import Infrastructure.debug as debug
 
-debug.debugLevel = debug.DebugLevels.warnings
+#debug.debugLevel = debug.DebugLevels.warnings
 
-src = AbsoluteVoltage.AbsoluteVoltage(5)
-gnd = AbsoluteVoltage.AbsoluteVoltage(0)
+src = AbsoluteVoltage.AbsoluteVoltage(5,name="Vcc")
+gnd = AbsoluteVoltage.AbsoluteVoltage(0,name="GND")
 
 j = Junction.Junction(name="Output 1")
 k = Junction.Junction(name="Output 2")

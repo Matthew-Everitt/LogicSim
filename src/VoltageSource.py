@@ -13,3 +13,5 @@ class VoltageSource(BaseClasses.Polarized.Polarized):
   def __init__(self, voltage, *args, **kwargs):
     super(VoltageSource, self).__init__(*args, **kwargs)
     self.voltage = voltage
+
+  
