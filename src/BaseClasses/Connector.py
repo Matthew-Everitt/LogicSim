@@ -14,12 +14,10 @@ class Connector(Connectable.Connectable):
     """Connect one end of a connection to the object 'connection' """
     # Don't doubly connect. This doesn't prevent us from doing anything as the only real use case for that would be to connect both ends of the resistor to the same junction, which shorts out the resistor and so is not an important situation. If we do really want to short out a resistor for whatever reason we can use two junctions and a wire (or 0Ohm resistor)
     # In cases like that the thing in self.connections will be the junction, so this will pass by here anyway
-    if debug.debugLevel >= debug.DebugLevels.verbose:
-      print "In ", self, ".connect(", connection, ")"
+    debug.verbose( "In ", self, ".connect(", connection, ")")
 
     if connection in self.connections:
-      if debug.debugLevel >= debug.DebugLevels.verbose:
-        print self, "already connected to", connection
+      debug.verbose( self, "already connected to", connection)
       return
 
     # Resistors can only connect to two places. Those places should be junctions, which can connect to arbitrarily many things, but a resistor itself has two ends.

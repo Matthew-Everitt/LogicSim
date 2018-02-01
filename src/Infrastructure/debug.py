@@ -57,3 +57,12 @@ def __print(*args):
 def verbose(*args, **kwargs):
   if debugLevel >= DebugLevels.verbose:
     __print(*args, **kwargs)
+
+def warning(*args, **kwargs):
+  if debugLevel >= DebugLevels.warning:
+    __print(*args, **kwargs)
+
+
+def error(*args, **kwargs):
+  if debugLevel >= DebugLevels.error:
+    __print(*args, **kwargs)

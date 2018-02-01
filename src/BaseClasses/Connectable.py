@@ -37,8 +37,7 @@ class Connectable(BaseClass.BaseClass):
       self.connections.remove(connection)
       connection.disconnect(self)
     else:
-      if debug.debugLevel >= debug.debugLevels.Warning:
-        print "Tried to remove ", connection, " from ", self, " but it wasn't connected"
+      debug.warning("Tried to remove ", connection, " from ", self, " but it wasn't connected.")
 
   @debug.indented
   def getTheveninEquiv(self, excluded=[]):

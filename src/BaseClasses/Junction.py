@@ -11,9 +11,8 @@ class Junction(Connectable.Connectable):
   def connect(self, connection):
     """Connect something to the junction. This is a lot like a Connector, but there is no limit on the number of things, and the rule Connector -> junction is of course reversed here."""
     if connection in self.connections:
-      if debug.debugLevel >= debug.DebugLevels.verbose:
-        print self, "already connected to", connection
-        return
+      debug.verbose( self, "already connected to", connection)
+      return
 
     # Connect directly to connections, that's the name of the game.
     if isinstance(connection, Connector.Connector):

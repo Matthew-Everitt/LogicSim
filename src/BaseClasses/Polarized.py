@@ -21,19 +21,19 @@ class Polarized(Connector.Connector, Device.Device):
 
   def connect(self, connection, polarity=None):
     """A voltage source has two special connections, +ve and negative. As such this function should never be called by anything but the end user, who should probably only call it via a helper or init function anyway"""
-    if debug.debugLevel >= debug.DebugLevels.verbose:
-      print "In ", self, ".connect(", connection, ")"
-      print "\t\t", self.connections
+    debug.verbose( "In ", self, ".connect(", connection, ")")
+    debug.indent()
+    debug.verbose("Has connections :  ",self.connections)
+    debug.unindent()
+    
     # Check to see if we're already connected
     if connection in self.connections:
-      if debug.debugLevel >= debug.DebugLevels.verbose:
-        print self, "already connected to", connection
-
-        # If we're already connected to the same polarity (or if we've not been told which polarity) then assume we're ok to leave it as is. This is mainly so the reverse connection is gracefully ignored
-        if (polarity == self.positive and not self._positiveConnection is connection) or (polarity == self.negative and not self._negativeConnection is connection):
-          # Not just trying to reconnect, trying to short us out or . Bad times.
-          raise ConnectionError("Trying to connect "+str(connection)+" to "+str(self)+", but that looks like it would be a short!")
-        return
+      debug.verbose( self, "already connected to", connection)
+      # If we're already connected to the same polarity (or if we've not been told which polarity) then assume we're ok to leave it as is. This is mainly so the reverse connection is gracefully ignored
+      if (polarity == self.positive and not self._positiveConnection is connection) or (polarity == self.negative and not self._negativeConnection is connection):
+        # Not just trying to reconnect, trying to short us out or . Bad times.
+        raise ConnectionError("Trying to connect "+str(connection)+" to "+str(self)+", but that looks like it would be a short!")
+      return
 
     if polarity is None:
       raise ConnectionError("Tried to connected to a polarized device without specifying a polarity.")
