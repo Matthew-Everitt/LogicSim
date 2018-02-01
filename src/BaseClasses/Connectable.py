@@ -84,7 +84,7 @@ class Connectable(BaseClass.BaseClass):
     connectedDevices={ x for x in connectedDevices if not x[1] == np.inf }
     debug.verbose("Remove inf resistances :  ",connectedDevices)
     
-    voltageNumerator = 0
+    voltageNumerator = 0.0
     voltageDenominator = 0.0
 
     # Calculate the equivalent voltage:

@@ -6,6 +6,7 @@ import resistor
 import BaseClasses.Junction as Junction
 import BaseClasses.AbsoluteVoltage as AbsoluteVoltage
 import BaseClasses.VoltageProbe as VoltageProbe
+
 class TestStringMethods(unittest.TestCase):
 
   def twoResistorDivider(self,R1,R2,V):
