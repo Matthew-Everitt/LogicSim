@@ -14,7 +14,7 @@ class TestStringMethods(unittest.TestCase):
     
     probe=VoltageProbe.VoltageProbe()
 
-    j = Junction.Junction(name="Output")
+    j = Junction.Junction(name="Joint")
 
     R = resistor.Resistor(R1, name="R1")
 
@@ -30,7 +30,7 @@ class TestStringMethods(unittest.TestCase):
     S.connect(j)
     S.connect(gnd)
 
-    return probe.getVoltageResistance()
+    return j.getVoltageResistance()
 
     
   def test_EqualDivider(self):

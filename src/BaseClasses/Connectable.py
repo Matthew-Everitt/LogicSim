@@ -63,7 +63,7 @@ class Connectable(BaseClass.BaseClass):
 
     # Follow every link
     for connection in self.connections:
-      debug.verbose("-At", self, "considering connection to", connection)
+      debug.verbose("At", self, "considering connection to", connection)
 
       if not connection in excluded:
         # If we've not been told to exclude it follow the link to a simplified source.
@@ -75,16 +75,15 @@ class Connectable(BaseClass.BaseClass):
         connectedDevices.add((v, r, i))
 
         # If the resistance of the source is non zero add its reciprocal (the conductance) to the accumulator
-        if r != 0.0:
-          conductance += 1.0/r
-        else:
-          # If the resistance is zero then the conductance is infinite.
-          conductance += np.inf
+        conductance += np.float64(1.0)/r
       else:
         debug.verbose("--Connection Excluded")
       debug.verbose("Connection list :  ", connectedDevices)
       i += 1
-
+      
+    connectedDevices={ x for x in connectedDevices if not x[1] == np.inf }
+    debug.verbose("Remove inf resistances :  ",connectedDevices)
+    
     voltageNumerator = 0
     voltageDenominator = 0.0
 
@@ -105,8 +104,8 @@ class Connectable(BaseClass.BaseClass):
       voltageNumerator += device[0]*resistanceProduct
 
     # And now the results are easy to get
-    outputVoltage = voltageNumerator/voltageDenominator
-    outputResistance = 1.0/conductance
+    outputVoltage = np.float64(voltageNumerator)/voltageDenominator
+    outputResistance = np.float64(1.0)/conductance
     return outputVoltage, outputResistance
   
   
