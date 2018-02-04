@@ -17,10 +17,10 @@ class Connectable(BaseClass.BaseClass):
     self.connections = set()
 
     # Everything has resistance,even if it is zero
-    self.resistance = 0.0
+    self._resistance = 0.0
 
     # And everything adds a voltage, even if it's zerp.
-    self.voltage = 0.0
+    self._voltage = 0.0
     
     
     # Accept either a single iterable, or a list of things to connect to (or nothing, I suppose)
@@ -31,8 +31,14 @@ class Connectable(BaseClass.BaseClass):
       for connection in args:
         self.connect(connection)
 
+  def voltage(self,fromConnection=None,toConnection=None):
+    return np.float64(self._voltage)
+  
+  def resistance(self,fromConnection=None,toConnection=None):
+    return np.float64(self._resistance)
+  
   def connect(self, connection):
-    """ What you should allow connectons to depends heavily on what you are, so child classes need to implement this themselves. The only common requirement is that the object gets added to self.connections anyway."""
+    """ What you should allow connections to depends heavily on what you are, so child classes need to implement this themselves. The only common requirement is that the object gets added to self.connections anyway."""
     raise NotImplementedError(
       str(self)+" doesn't properly implement connect")
 
@@ -114,8 +120,8 @@ class Connectable(BaseClass.BaseClass):
     
     
     
-    outputResistance += self.resistance
-    outputVoltage += self.voltage
+    outputResistance += self.resistance()
+    outputVoltage += self.voltage()
         
     return outputVoltage, outputResistance
   

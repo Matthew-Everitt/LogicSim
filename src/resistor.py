@@ -6,7 +6,7 @@ import Infrastructure.graph as graph
 class Resistor(roles.Connector):
   def __init__(self, r, *args, **kwargs):
     super(Resistor, self).__init__(*args, **kwargs)
-    self.resistance = r
+    self._resistance = r
   
   def _dotRepr(self):
     nodeName=self._dotName()+"_rect"
@@ -16,7 +16,7 @@ class Resistor(roles.Connector):
     node=graph.dotEntry(nodeName)
     
     node['shape']='rect'
-    node['label']=self.label+"\n"+str(self.resistance)+"ohms"
+    node['label']=self.label+"\n"+str(self.resistance())+"ohms"
     entries.append(node)
     
     for conn in self.connections:

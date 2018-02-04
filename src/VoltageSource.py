@@ -13,7 +13,7 @@ class VoltageSource(BaseClasses.Polarized.Polarized):
 
   def __init__(self, voltage, *args, **kwargs):
     super(VoltageSource, self).__init__(*args, **kwargs)
-    self.voltage = voltage
+    self._voltage = voltage
 
   def _dotRepr(self):
     nodeName=self._dotName()+"_rect"
@@ -23,7 +23,7 @@ class VoltageSource(BaseClasses.Polarized.Polarized):
     node=graph.dotEntry(nodeName)
     
     node['shape']='circle'
-    node['label']=self.label+"\n"+str(self.voltage)+"V"
+    node['label']=self.label+"\n"+str(self.voltage())+"V"
     entries.append(node)
     
     
@@ -38,5 +38,3 @@ class VoltageSource(BaseClasses.Polarized.Polarized):
     
     return entries
   
-  #def getTheveninEquiv(self,excluded):
-    #return (self.voltage,self.resistance)

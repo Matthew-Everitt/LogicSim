@@ -10,7 +10,7 @@ class AbsoluteVoltage(Junction.Junction):
 
   def __init__(self, voltage, *args, **kwargs):
     super(AbsoluteVoltage, self).__init__(*args, **kwargs)
-    self.voltage = voltage
+    self._voltage = voltage
 
   @debug.indented
   def getTheveninEquiv(self, exclude=None):
@@ -19,8 +19,8 @@ class AbsoluteVoltage(Junction.Junction):
 
     Returns two values, the effective voltage and resistance.
     """
-    debug.verbose("Generating Thevenin equiv for", self, "- fixed voltage of", self.voltage,"V")
-    return float(self.voltage), 0.0
+    debug.verbose("Generating Thevenin equiv for", self, "- fixed voltage of", self.voltage(),"V")
+    return self.voltage(), 0.0
 
     
   def _dotRepr(self):
