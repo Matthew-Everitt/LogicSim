@@ -53,4 +53,11 @@ class TestStringMethods(unittest.TestCase):
     self.assertEqual( Rout, 1.0/(1.0/RinTop+1.0/RinBottom))
     
     
-    
+if __name__ == "__main__":
+  
+  import os,inspect
+  import runTests
+  
+  currentFile=os.path.abspath(inspect.getfile(inspect.currentframe()))
+  print currentFile
+  runTests.runTests( start_dir=os.path.dirname(currentFile), glob=os.path.basename(currentFile) )

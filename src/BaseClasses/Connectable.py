@@ -4,6 +4,7 @@ import BaseClass
 import Infrastructure.debug as debug
 
 import numpy as np
+np.seterr(divide="ignore",invalid="ignore")
 
 
 class Connectable(BaseClass.BaseClass):
@@ -18,6 +19,10 @@ class Connectable(BaseClass.BaseClass):
     # Everything has resistance,even if it is zero
     self.resistance = 0.0
 
+    # And everything adds a voltage, even if it's zerp.
+    self.voltage = 0.0
+    
+    
     # Accept either a single iterable, or a list of things to connect to (or nothing, I suppose)
     if len(args) > 0:
       if len(args) == 1 and hasattr("__iter__", args[0]):
@@ -69,7 +74,7 @@ class Connectable(BaseClass.BaseClass):
         # If we've not been told to exclude it follow the link to a simplified source.
         v, r = connection.getTheveninEquiv(excluded+[self])
         # Add the resistance of this link. Everything has a resistance, and it's zero if it hasn't been explicitly set, so we can do this without worrying if it makes any particular physical sense or not
-        r += connection.resistance
+
         debug.verbose("--Adding", v, "V via", r, "Ohms")
         # Add the result (and the counter) to the set of connections
         connectedDevices.add((v, r, i))
@@ -106,6 +111,12 @@ class Connectable(BaseClass.BaseClass):
     # And now the results are easy to get
     outputVoltage = np.float64(voltageNumerator)/voltageDenominator
     outputResistance = np.float64(1.0)/conductance
+    
+    
+    
+    outputResistance += self.resistance
+    outputVoltage += self.voltage
+        
     return outputVoltage, outputResistance
   
   
@@ -116,8 +127,8 @@ class Connectable(BaseClass.BaseClass):
   
   def getVoltage(self):
     """ Returns only the voltage part of getVoltageResistance"""
-    return self.getVoltageResistance[0]
+    return self.getVoltageResistance()[0]
   
   def getResistance(self):
     """ Returns only the resistance part of getVoltageResistance"""
-    return self.getVoltageResistance[1]
+    return self.getVoltageResistance()[1]

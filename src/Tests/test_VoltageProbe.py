@@ -65,3 +65,12 @@ class TestStringMethods(unittest.TestCase):
     atProbe = probe.getVoltageResistance()
     
     #self.assertEqual ( atJ, atProbe)
+
+if __name__ == "__main__":
+  
+  import os,inspect
+  import runTests
+  
+  currentFile=os.path.abspath(inspect.getfile(inspect.currentframe()))
+  print currentFile
+  runTests.runTests( start_dir=os.path.dirname(currentFile), glob=os.path.basename(currentFile) )

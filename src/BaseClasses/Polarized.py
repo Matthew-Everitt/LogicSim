@@ -60,3 +60,4 @@ class Polarized(Connector.Connector, Device.Device):
       return
     # If we reach this point then we haven't known how to connect to whatever it is, which means either somebody is trying to do something really weird, or we just haven't implemented that yet
     raise NotImplementedError("Don't know how to add a connection from "+str(connection)+" to "+str(self))
+
