@@ -16,20 +16,20 @@ class TestStringMethods(unittest.TestCase):
     gnd=AbsoluteVoltage.AbsoluteVoltage(0,name="gnd")
     probe=VoltageProbe.VoltageProbe(name="probe")
 
-    V.connect(gnd,V.negative)
-    V.connect(probe,V.positive)
+    V.connect(gnd,"negative")
+    V.connect(probe,"positive")
 
     self.assertEqual( probe.getVoltageResistance(), (5.0,0.0) )
     
   def test_VoltageSourcePolarity(self):
-    """ Test that a reverse connected voltage source gives a negative voltage. This currently doesn't work!"""
+    """ Test that a reverse connected voltage source gives a negative voltage. """
     V=VoltageSource.VoltageSource(5,name="SRC")
 
     gnd=AbsoluteVoltage.AbsoluteVoltage(0,name="gnd")
     probe=VoltageProbe.VoltageProbe(name="probe")
 
-    V.connect(gnd,V.positive)
-    V.connect(probe,V.negative)
+    V.connect(gnd,"positive")
+    V.connect(probe,"negative")
 
     self.assertEqual( probe.getVoltageResistance(), (-5.0,0.0) )
 
@@ -42,11 +42,11 @@ class TestStringMethods(unittest.TestCase):
 
     j=Junction.Junction()
 
-    V1.connect(gnd,V1.negative)
-    V1.connect(j,V1.positive)
+    V1.connect(gnd,"negative")
+    V1.connect(j,"positive")
     
-    V2.connect(j,V2.negative)
-    V2.connect(probe,V2.positive)
+    V2.connect(j,"negative")
+    V2.connect(probe,"positive")
 
     self.assertEqual( probe.getVoltageResistance(), (10.0,0.0) )
     
@@ -61,11 +61,11 @@ class TestStringMethods(unittest.TestCase):
 
     
 
-    V1.connect(gnd,V1.negative)
-    V1.connect(R,V1.positive)
+    V1.connect(gnd,"negative")
+    V1.connect(R,"positive")
     
-    V2.connect(R,V2.negative)
-    V2.connect(probe,V2.positive)
+    V2.connect(R,"negative")
+    V2.connect(probe,"positive")
     graph.graph(R).output("test.gv")
     self.assertEqual( probe.getVoltageResistance(), (10.0,100.0) )
 

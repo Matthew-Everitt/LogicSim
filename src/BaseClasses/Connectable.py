@@ -63,7 +63,11 @@ class Connectable(BaseClass.BaseClass):
     if not hasattr(excluded, "__iter__"):
       excluded = [excluded]
 
-      # Keep track of the properties of what we're connected to in a set.
+    if len(excluded) > 0:
+      entryPoint=excluded[-1]
+    else:
+      entryPoint=None  
+    # Keep track of the properties of what we're connected to in a set.
     connectedDevices = set(())
 
     # We can tot up the total conductance easily
@@ -118,10 +122,11 @@ class Connectable(BaseClass.BaseClass):
     outputVoltage = np.float64(voltageNumerator)/voltageDenominator
     outputResistance = np.float64(1.0)/conductance
     
+
     
     
-    outputResistance += self.resistance()
-    outputVoltage += self.voltage()
+    outputResistance += self.resistance(fromConnection=entryPoint)
+    outputVoltage += self.voltage(fromConnection=entryPoint)
         
     return outputVoltage, outputResistance
   
