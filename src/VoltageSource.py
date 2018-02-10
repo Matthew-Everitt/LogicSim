@@ -36,14 +36,10 @@ class VoltageSource(BaseClasses.Polarized.Polarized):
     entries.append(node)
     
     
-    edge=graph.dotEntry( self.connectionMap["positive"]._dotName()+"--"+nodeName+":n" )
-    edge['headlabel']="+"
-    entries.append(edge)
-    
-    
-    edge=graph.dotEntry( self.connectionMap["negative"]._dotName()+"--"+nodeName+":s" )
-    edge['headlabel']="-"
-    entries.append(edge)
+    for name,description in self.avaliableConnections.iteritems():
+      edge=graph.dotEntry( self.connectionMap[name]._dotName()+"--"+nodeName+":"+description.pole )
+      edge['headlabel']=description.label
+      entries.append(edge)
     
     return entries
   
