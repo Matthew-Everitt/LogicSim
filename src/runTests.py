@@ -20,7 +20,7 @@ def runTests(glob="*.py",start_dir="./Tests"):
     import colour_runner.runner
     runner=colour_runner.runner.ColourTextTestRunner(verbosity=10)
   except Exception as e:
-    print e
+    #print e
     runner = unittest.TextTestRunner(verbosity=10)
     
   cov.start() 
