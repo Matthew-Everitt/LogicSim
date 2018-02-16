@@ -48,7 +48,8 @@ def exploreGraph(start):
 
 def graph(start):
   strings=Graph()
-  strings.append("graph {")
+  strings.append("graph {overlap = false;  splines = true;  rankdir = TB;    rank=same;")
+  #Ideally we'd sort into Supplies, devices, ground and wires, assigning ranks to get neater output.
   for entry in exploreGraph(start):
     for line in entry._dotRepr():
       strings.append(line)
